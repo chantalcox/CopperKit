@@ -108,12 +108,7 @@ public class CopperContactsRecord: CopperRecordObject, CopperContacts {
     public static func getContactsWithPictureURLs(session: C29SessionDataSource, contacts: Set<CopperContact>, callback: (contacts: Set<CopperContact>)->()) {
         let group = dispatch_group_create()
         var contactsWithPictures = Set<CopperContact>()
-        
-        guard let userId = session.userId else {
-            callback(contacts: contacts)
-            return
-        }
-        
+
         for var contact in Array(contacts) {
             dispatch_group_enter(group)
             if contact.pictureURL == nil && contact.picture != nil {
@@ -126,7 +121,7 @@ public class CopperContactsRecord: CopperRecordObject, CopperContacts {
                 // TODO this should queue requests after some number, like 3
                 // vs sending them all at once in parallel
                 dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    session.api.createBytes(userId, fileID: "contact_\(contact.identifier)", file: imageData, callback: { bytes, error in
+                    session.sessionCoordinator?.createByteFromFile("contact_\(contact.identifier)", data: imageData, callback: { bytes, error in
                         if let bytes = bytes as? C29Bytes {
                             contact.pictureURL = bytes.url
                             contactsWithPictures.insert(contact)

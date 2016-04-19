@@ -8,7 +8,7 @@
 
 import Foundation
 
-class C29Bytes {
+public class C29Bytes {
     
     enum Key: String {
         case URL = "url"
@@ -23,7 +23,7 @@ class C29Bytes {
         self.url = url
     }
     
-    class func fromDictionary(dataDict: NSDictionary) -> C29Bytes? {
+    public class func fromDictionary(dataDict: NSDictionary) -> C29Bytes? {
         if let fileId = dataDict[Key.FileId.rawValue] as? String,
             let url = dataDict[Key.URL.rawValue] as? String {
                 guard let _url = NSURL(string: url) else {

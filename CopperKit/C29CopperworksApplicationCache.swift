@@ -57,11 +57,7 @@ public class C29CopperworksApplicationCache: NSObject, NSCoding {
         cache.removeValueForKey(application.id)
         save()
         NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
-        guard let userId = session?.userId else {
-            C29Log(.Error, "You must set session instance variable with a valid user with a valid userId to remove from the API")
-            return
-        }
-        session?.api.deleteUserApplicationForUserID(userId, applicationId: application.id) { (object, error) -> () in }
+        session?.sessionCoordinator?.deleteUserApplication(application) { (object, error) -> () in }
     }
 
     public func update(replace: C29CopperworksApplication, add: C29CopperworksApplication) {

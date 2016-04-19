@@ -6,7 +6,7 @@
 //  Copyright © 2016 Copper Technologies, Inc. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Copper Records
 

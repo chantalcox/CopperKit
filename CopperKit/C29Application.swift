@@ -107,8 +107,8 @@ public class C29Application: NSObject {
         }
         
         // We don't have local copies of the records, so let's make sure we're configured correctly.
-        guard let u =  NSURL(string: "\(baseURL)/\(CopperNetworkAPI.Path.OauthDialog.rawValue)") else {
-            C29Log(.Error, "C29Application baseURL is invalid '\(baseURL)/\(CopperNetworkAPI.Path.OauthDialog.rawValue)'")
+        guard let u =  NSURL(string: "\(baseURL)/\(C29APIPath.OauthDialog.rawValue)") else {
+            C29Log(.Error, "C29Application baseURL is invalid '\(baseURL)/\(C29APIPath.OauthDialog.rawValue)'")
             completion(userInfo: nil, error: Error.InvalidConfiguration.nserror)
             return
         }

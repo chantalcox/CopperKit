@@ -18,7 +18,7 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
         return ","
     }
     
-    enum Key: String {
+    public enum Key: String {
         case UserId = "user_id"
         case RequestId = "request_id"
         case Timestamp = "timestamp"
@@ -206,19 +206,10 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
     }
 
     public class func getRequest(session: C29SessionDataSource, requestId: String, callback: C29RequestCallback) {
-        // TODO we should check the requeststack to see if this request is already stored locally...
-        guard let userId = session.userId else {
-            callback(request: nil)
-            return
-        }
-        session.api.getRequestForUserID(userId, requestId: requestId) {
-            (request: AnyObject?, error: NSError?) in
-            if let request = request as? C29Request {
+        // TODO should we check the requeststack to see if this request is already stored locally... ?
+        session.sessionCoordinator?.getRequest(requestId, callback: { request in
                 callback(request: request)
-            } else {
-                callback(request: C29Request?())
-            }
-        }
+        })
     }
 
     // Write our request status to Firebase for the server listener... this can and should get smarter, and will likely get obviated by a native API when we roll off firebase support
@@ -238,11 +229,7 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
         app.updateRecords(records)
         
         // Make our API calls to send the response
-        guard let userId = session.userId else {
-            callback(success: false, redirecting: false)
-            return
-        }
-        session.api.setRequestGrantForUserID(userId, request: self, status: status, records: records, forceRecordUpload: false) { (requestGrant: AnyObject?, error: NSError?) -> () in
+        session.sessionCoordinator?.setRequestGrant(self, status: status, records: records, forceRecordUpload: false) { (requestGrant: AnyObject?, error: NSError?) -> () in
             if let requestGrant = requestGrant as? C29RequestGrant {
                 // Will overwrite any existing application of the same id, hence updateRecords is important above!
                 session.applicationCache.push(app)
@@ -262,11 +249,7 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
     }
     
     public func setAck(session: C29SessionDataSource) {
-        if let userID = session.userId {
-            session.api.setRequestAckForUserID(userID, request: self) { success, error in
-                // no op, best effort, fire and forget
-            }
-        }
+        session.sessionCoordinator?.setRequestAck(self)
     }
 
 }

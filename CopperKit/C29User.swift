@@ -14,12 +14,27 @@ public class C29User: NSObject, NSCoding {
     public static var CacheFile: String = "C29User"
     static var FileType = FileSystemType.Documents
     
-    public enum Key: String {
-        case Id = "id"
-        case UserId = "user_id"
-        case ICloudToken = "icloud_token"
-        case LastRequestId = "last_request_id"
-        case Role = "role"
+    @objc public enum Key: Int {
+        case Id = 0
+        case UserId = 1
+        case ICloudToken = 2
+        case LastRequestId = 3
+        case Role = 4
+        
+        public var value: String {
+            switch self {
+            case .Id:
+                return "id"
+            case .UserId:
+                return "user_id"
+            case .ICloudToken:
+                return "icould_token"
+            case .LastRequestId:
+                return "last_request_id"
+            case .Role:
+                return "role"
+            }
+        }
     }
 
     enum NSCodingKeys: String {
@@ -63,13 +78,13 @@ public class C29User: NSObject, NSCoding {
         coder.encodeObject(devices, forKey: NSCodingKeys.UserDevices.rawValue)
     }
     
-    class func fromDictionary(dataDict: NSDictionary) -> C29User? {
-        if let _ = dataDict[Key.UserId.rawValue] as? String {
+    public class func fromDictionary(dataDict: NSDictionary) -> C29User? {
+        if let _ = dataDict[Key.UserId.value] as? String {
             let user = C29User()
-            user.setValue(.Id, value: dataDict[Key.Id.rawValue])
-            user.setValue(.ICloudToken, value: dataDict[Key.ICloudToken.rawValue])
-            user.setValue(.LastRequestId, value: dataDict[Key.LastRequestId.rawValue])
-            user.setValue(.Role, value: dataDict[Key.Role.rawValue])
+            user.setValue(.Id, value: dataDict[Key.Id.value])
+            user.setValue(.ICloudToken, value: dataDict[Key.ICloudToken.value])
+            user.setValue(.LastRequestId, value: dataDict[Key.LastRequestId.value])
+            user.setValue(.Role, value: dataDict[Key.Role.value])
             return user
         }
         C29LogWithRemote(.Critical, error: Error.InvalidFormat.nserror, infoDict: dataDict as! [String : AnyObject])
@@ -79,14 +94,14 @@ public class C29User: NSObject, NSCoding {
     // MARK: User Info
     
     public func getValue(key: Key) -> AnyObject? {
-        return data[key.rawValue]
+        return data[key.value]
     }
     
     public func setValue(key: Key, value: AnyObject?) {
         if value == nil {
-            data.removeValueForKey(key.rawValue)
+            data.removeValueForKey(key.value)
         } else {
-            data.updateValue(value!, forKey: key.rawValue)
+            data.updateValue(value!, forKey: key.value)
         }
     }
     

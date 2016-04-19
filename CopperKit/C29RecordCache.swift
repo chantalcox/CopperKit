@@ -163,22 +163,12 @@ public class C29RecordCache: NSObject, NSCoding {
         }
         C29Log(.Debug, "CopperRecordCache.saveToAPI uploading \(uploads.count) records")
         
-        guard let userId = session.userId else {
-            callback?(success: false, records: uploads)
-            return
-        }
-        
         CopperNetworkActivityRegistry.sharedRegistry.activityBegan()
-        session.api.saveUserRecordsForUserID(userId, records: uploads) {
-            (success: AnyObject?, error: NSError?) in
+        session.sessionCoordinator?.saveUserRecords(uploads, callback: { success in
             C29Log(.Debug, "CopperRecordCache.saveToAPI save was successful? \(success)")
             CopperNetworkActivityRegistry.sharedRegistry.activityEnded()
-            if error != nil || success == nil {
-                callback?(success: false, records: uploads)
-            } else {
-                callback?(success: true, records: uploads)
-            }
-        }
+            callback?(success: success, records: uploads)
+        })
     }
     
     public func deleteFromAPI(session: C29SessionDataSource, records: [CopperRecordObject], forceDelete: Bool = false, callback: ((success: Bool, records: [CopperRecordObject])->())! = nil) {
@@ -198,21 +188,12 @@ public class C29RecordCache: NSObject, NSCoding {
         }
         C29Log(.Debug, "CopperRecordCache.deleteFromAPI deleting \(removals.count) records")
         
-        guard let userId = session.userId else {
-            callback(success: false, records: removals)
-            return
-        }
         CopperNetworkActivityRegistry.sharedRegistry.activityBegan()
-        session.api.deleteUserRecordsForUserID(userId, records: removals) {
-            (success: AnyObject?, error: NSError?) in
+        session.sessionCoordinator?.deleteUserRecords(removals, callback: { success in
+            C29Log(.Debug, "CopperRecordCache  deleteFromAPI save was successful? \(success)")
             CopperNetworkActivityRegistry.sharedRegistry.activityEnded()
-            C29Log(.Debug, "CopperRecordCache.deleteFromAPI delete was successful? \(success)")
-            if error != nil || success == nil {
-                callback?(success: false, records: removals)
-            } else {
-                callback?(success: true, records: removals)
-            }
-        }
+            callback?(success: success, records: removals)
+        })
     }
     
     public func load() -> Bool {

@@ -60,7 +60,7 @@ public class C29CopperworksApplication: NSObject, NSCoding, C29CopperworksApplic
         coder.encodeObject(redirectUri, forKey: Key.RedirectURI.rawValue)
     }
 
-    class func fromDictionary(dataDict: NSDictionary) -> C29CopperworksApplication? {
+    public class func fromDictionary(dataDict: NSDictionary) -> C29CopperworksApplication? {
         C29Log(.Debug, "Application.fromDictionary")
         if let applicationId = dataDict[Key.ApplicationId.rawValue] as? String,
             name = dataDict[Key.Name.rawValue] as? String {

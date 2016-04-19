@@ -54,8 +54,8 @@ extension String {
     
     public var htmlToAttributedString: NSAttributedString {
         let attributedString = try! NSAttributedString(data: self.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!,
-            options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
-            documentAttributes: nil)
+                                                       options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+                                                       documentAttributes: nil)
         return attributedString
     }
     
@@ -86,5 +86,5 @@ extension String {
     public subscript (r: Range<Int>) -> String {
         return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
     }
-
+    
 }

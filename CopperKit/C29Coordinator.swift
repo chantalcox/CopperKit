@@ -43,20 +43,25 @@ public class C29Coordinator {
         if userInfo == nil {
             userInfo = C29UserInfo(userId: userId, records: nil)
         }
-
-        networkAPI.getUserInfo({ dataDict, error in
-            guard error == nil else {
-                callback(userInfo: nil, error: error)
-                return
-            }
-            guard let dataDict = dataDict as? NSDictionary else {
-                callback(userInfo: nil, error: Error.RecordsDictInvalidFormat.nserror)
-                return
-            }
-            self.userInfo?.fromDictionary(dataDict, callback: {(newUserInfo: C29UserInfo?, error: NSError?) in
-                callback?(userInfo: self.userInfo, error: error)
-            })
-        })
+        
+        let url = NSURL(string: "\(networkAPI.URL)/\(C29APIPath.OauthUserinfo.rawValue)")!
+        networkAPI.makeHTTPRequest(C29APIMethod.GET_USERINFO,
+            callback: { dataDict, error in
+                guard error == nil else {
+                    callback(userInfo: nil, error: error)
+                    return
+                }
+                guard let dataDict = dataDict as? NSDictionary else {
+                    callback(userInfo: nil, error: Error.RecordsDictInvalidFormat.nserror)
+                    return
+                }
+                self.userInfo?.fromDictionary(dataDict, callback: {(newUserInfo: C29UserInfo?, error: NSError?) in
+                    callback?(userInfo: self.userInfo, error: error)
+                })
+            },
+            url: url,
+            httpMethod: HTTPMethod.GET,
+            authentication: true)
     }
     
     func getPermittedScopes() -> [C29Scope]? {
@@ -68,33 +73,33 @@ public class C29Coordinator {
 @available(iOS 9.0, *)
 extension C29Coordinator: CopperNetworkAPIDelegate {
 
-    public func authTokenForAPI(api: CopperNetworkAPI) -> String? {
+    @objc public func authTokenForAPI(api: CopperNetworkAPI) -> String? {
         return self.jwt
     }
     
-    public func userIdentifierForLoggingErrorsInAPI(api: CopperNetworkAPI) -> AnyObject? {
+    @objc public func userIdentifierForLoggingErrorsInAPI(api: CopperNetworkAPI) -> AnyObject? {
         if let userId = userInfo?.userId {
             return userId
         }
         return "UserId Unknown"
     }
     
-    public func networkAPI(api: CopperNetworkAPI, recordAnalyticsEvent event: String, withParameters parameters: [String : AnyObject]) {
+    @objc public func networkAPI(api: CopperNetworkAPI, recordAnalyticsEvent event: String, withParameters parameters: [String : AnyObject]) {
         C29LogWithRemote(.Error, error: Error.Non20XAPIError.nserror, infoDict: parameters)
     }
     
-    public func networkAPI(api: CopperNetworkAPI, attemptLoginWithCallback callback: (success: Bool, error: NSError?) -> ()) {
+    @objc public func networkAPI(api: CopperNetworkAPI, attemptLoginWithCallback callback: (success: Bool, error: NSError?) -> ()) {
         C29LogWithRemote(.Error, error: Error.AuthError.nserror, infoDict: nil)
         callback(success: false, error: Error.AuthError.nserror)
         // If we get here, it likely means our access token was invalid or expired
         // TODO we should use it to get a refresh token
     }
     
-    public func beganRequestInNetworkAPI(api: CopperNetworkAPI) {
+    @objc public func beganRequestInNetworkAPI(api: CopperNetworkAPI) {
         CopperNetworkActivityRegistry.sharedRegistry.activityBegan()
     }
     
-    public func endedRequestInNetworkAPI(api: CopperNetworkAPI) {
+    @objc public func endedRequestInNetworkAPI(api: CopperNetworkAPI) {
        CopperNetworkActivityRegistry.sharedRegistry.activityEnded()
     }
     

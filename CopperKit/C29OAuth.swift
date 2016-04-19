@@ -10,7 +10,7 @@ import Foundation
 
 public class C29OAuth {
     
-    enum Key: String {
+    public enum Key: String {
         case ApplicationId = "client_id" // we leave this as client_id per the oauth spec
         case UserId = "user_id"
         case RedirectUri = "redirect_uri"
@@ -95,14 +95,15 @@ public class C29OAuth {
         // scope=openid%20profile
         // response_type=id_token%2Ctoken
         
-        guard let userId = session.userId else {
-            callback(request: nil, error: Error.NilUserId.nserror)
-            return
-        }
-
-        session.api.oauthAuthorize(userId, applicationId: applicationId, redirectUri: redirectUri, nonce: nonce, state: state, scope: scope, responseMode: C29OAuth.ResponseModeInternal, responseType: responseType, callback: { (request: AnyObject?, error: NSError?) -> () in
-            callback(request: request as? C29Request, error: error)
-        })
+//
+// TODO this needs to be added to the V29SessionCoordinator or made available to this file
+//        guard let userId = session.userId else {
+//            callback(request: nil, error: Error.NilUserId.nserror)
+//            return
+//        }        
+//        session.api.oauthAuthorize(userId, applicationId: applicationId, redirectUri: redirectUri, nonce: nonce, state: state, scope: scope, responseMode: C29OAuth.ResponseModeInternal, responseType: responseType, callback: { (request: AnyObject?, error: NSError?) -> () in
+//            callback(request: request as? C29Request, error: error)
+//        })
     }
 }
 

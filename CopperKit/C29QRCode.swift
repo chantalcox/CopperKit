@@ -31,7 +31,7 @@ public class C29QRCode {
                 case "open.withcopper.com", "open-staging.withcopper.com", "api-staging.withcopper.com", "api.withcopper.com":
                     if url.path == "/go" {
                         if let code = components.getQueryStringParameter(C29QRCode.Key.Code.rawValue) {
-                            session.api.getURLforCode(session.userId!, code: code, callback: { (url: AnyObject?, error: NSError?) -> () in
+                            session.sessionCoordinator?.getURLforCode(code, callback: { (url: AnyObject?, error: NSError?) -> () in
                                 if let url = url as? NSURL {
                                     C29OAuth.handleURL(url, session: session, callback: callback)
                                 }
@@ -55,7 +55,7 @@ public class C29QRCode {
         }
     }
 
-    class func fromDictionary(dataDict: NSDictionary) -> NSURL? {
+    public class func fromDictionary(dataDict: NSDictionary) -> NSURL? {
         if let url = dataDict[Key.URL.rawValue] as? String {
             return NSURL(string: url)
         }

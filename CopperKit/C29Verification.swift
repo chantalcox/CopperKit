@@ -8,14 +8,17 @@
 
 import Foundation
 
-public class C29Verification {
-
-}
-
-public class C29VerificationCode {
+@objc public class C29VerificationCode: NSObject {
     
-    enum Key: String {
-        case Code = "code"
+    @objc enum Key: Int {
+        case Code = 1
+        
+        var value: String {
+            switch self {
+            case Code:
+                return "code"
+            }
+        }
     }
     
     public var code: String
@@ -25,7 +28,7 @@ public class C29VerificationCode {
     }
     
     public class func fromDictionary(dataDict: NSDictionary) -> C29VerificationCode? {
-        if let code = dataDict[Key.Code.rawValue] as? String {
+        if let code = dataDict[Key.Code.value] as? String {
             return C29VerificationCode(code: code)
         }
         C29LogWithRemote(.Critical, error: C29VerificationError.InvalidFormat.nserror, infoDict: dataDict as! [String : AnyObject])
@@ -54,7 +57,7 @@ public class C29VerificationResult {
         self.deviceId = deviceId
     }
     
-    class func fromDictionary(dataDict: NSDictionary) -> C29VerificationResult? {
+    public class func fromDictionary(dataDict: NSDictionary) -> C29VerificationResult? {
         if let userId = dataDict[Key.UserId.rawValue] as? String,
             let token = dataDict[Key.Token.rawValue] as? String,
             let deviceId = dataDict[Key.DeviceId.rawValue] as? String,
