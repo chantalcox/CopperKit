@@ -114,9 +114,9 @@
 		F009BEF61CBED69800EC8A47 /* UITextView+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE961CBED69800EC8A47 /* UITextView+Copper.swift */; };
 		F009BEF71CBED69800EC8A47 /* UIView+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE971CBED69800EC8A47 /* UIView+Copper.swift */; };
 		F009C0921CBEF05200EC8A47 /* CopperKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009C0321CBEF05200EC8A47 /* CopperKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F03EB3B51CC6A3C8003C4506 /* C29Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EB3B41CC6A3C8003C4506 /* C29Networking.swift */; };
 		F0E7A8F21CBF30530009D5A5 /* C29SessionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E7A8F11CBF30530009D5A5 /* C29SessionDataSource.swift */; };
 		F0E7A8F41CBF30790009D5A5 /* String+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E7A8F31CBF30790009D5A5 /* String+Copper.swift */; };
-		F0F344051CC021A6000D7DFC /* C29Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F344041CC021A6000D7DFC /* C29Networking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -215,9 +215,9 @@
 		F009BE971CBED69800EC8A47 /* UIView+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Copper.swift"; path = "CopperKit/UIView+Copper.swift"; sourceTree = "<group>"; };
 		F009C0321CBEF05200EC8A47 /* CopperKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CopperKit.h; path = CopperKit/CopperKit.h; sourceTree = "<group>"; };
 		F009C03C1CBEF05200EC8A47 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CopperKit/Info.plist; sourceTree = "<group>"; };
+		F03EB3B41CC6A3C8003C4506 /* C29Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29Networking.swift; path = CopperKit/C29Networking.swift; sourceTree = "<group>"; };
 		F0E7A8F11CBF30530009D5A5 /* C29SessionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29SessionDataSource.swift; path = CopperKit/C29SessionDataSource.swift; sourceTree = "<group>"; };
 		F0E7A8F31CBF30790009D5A5 /* String+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Copper.swift"; path = "CopperKit/String+Copper.swift"; sourceTree = "<group>"; };
-		F0F344041CC021A6000D7DFC /* C29Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Networking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +328,7 @@
 				F009BE411CBED69700EC8A47 /* C29IdentityDataSource.swift */,
 				F009BE4A1CBED69700EC8A47 /* C29RequestDataSource.swift */,
 				F0E7A8F11CBF30530009D5A5 /* C29SessionDataSource.swift */,
-				F0F344041CC021A6000D7DFC /* C29Networking.swift */,
+				F03EB3B41CC6A3C8003C4506 /* C29Networking.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -546,6 +546,7 @@
 				F009BEEC1CBED69800EC8A47 /* Saveable.swift in Sources */,
 				F009BEE81CBED69800EC8A47 /* NSError+Copper.swift in Sources */,
 				F009BEA31CBED69800EC8A47 /* C29Logger.swift in Sources */,
+				F03EB3B51CC6A3C8003C4506 /* C29Networking.swift in Sources */,
 				F009BEA91CBED69800EC8A47 /* C29Request.swift in Sources */,
 				F009BE9F1CBED69800EC8A47 /* C29CopperworksApplicationDataSource.swift in Sources */,
 				F009BEBF1CBED69800EC8A47 /* CopperRecordObject.swift in Sources */,
@@ -573,7 +574,6 @@
 				F009BEA01CBED69800EC8A47 /* C29IconProcessor.swift in Sources */,
 				F009BEB11CBED69800EC8A47 /* C29Utils.swift in Sources */,
 				F009BEC41CBED69800EC8A47 /* Errors.swift in Sources */,
-				F0F344051CC021A6000D7DFC /* C29Networking.swift in Sources */,
 				F009BEA41CBED69800EC8A47 /* C29NetworkActivityRegistry.swift in Sources */,
 				F009BEEA1CBED69800EC8A47 /* NSObject+Copper.swift in Sources */,
 				F009BEE61CBED69800EC8A47 /* NSArray+NBAdditions.m in Sources */,

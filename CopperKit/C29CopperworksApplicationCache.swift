@@ -50,20 +50,17 @@ public class C29CopperworksApplicationCache: NSObject, NSCoding {
     public func push(application: C29CopperworksApplication) {
         cache.updateValue(application, forKey: application.id)
         save()
-        NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
     }
 
     public func remove(application: C29CopperworksApplicationDataSource) {
         cache.removeValueForKey(application.id)
         save()
-        NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
         session?.sessionCoordinator?.deleteUserApplication(application) { (object, error) -> () in }
     }
 
     public func update(replace: C29CopperworksApplication, add: C29CopperworksApplication) {
         remove(replace)
-        self.push(add)
-        NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
+        push(add)
     }
     
     public func setApplications(applications: [C29CopperworksApplication]) {
@@ -72,7 +69,6 @@ public class C29CopperworksApplicationCache: NSObject, NSCoding {
             cache.updateValue(application, forKey: application.id)
         }
         save()
-        NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
     }
 
     // Note: this only remove local copies -- not on Firebase!
@@ -103,6 +99,7 @@ public class C29CopperworksApplicationCache: NSObject, NSCoding {
         if let session = session {
             save(session.appGroupIdentifier)
         }
+        NSNotificationCenter.defaultCenter().postNotificationName(C29CopperworksApplicationCache.C29CopperworksApplicationCacheRefreshNotification, object: nil)
     }
 }
 

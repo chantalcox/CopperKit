@@ -8,11 +8,15 @@
 
 import Foundation
 
-// TODO here for testing and debugging ... this should probably be removed in production
-public let CopperKitHelloWorldAppId = "56FC63513259B250EC174C72B35697EB7C38B7B0"
-
 internal let C29ApplicationLinkReceivedNotification = "C29ApplicationLinkReceivedNotification"
-public typealias C29ApplicationUserInfoCompletionHandler = (userInfo: C29UserInfo?, error: NSError?)->()
+
+public typealias C29ApplicationUserInfoCompletionHandler = ((result: C29UserInfoResult<C29UserInfo, NSError>)->())
+
+public enum C29UserInfoResult<T, U> {
+    case UserCancelled
+    case Success(T)
+    case Failure(U)
+}
 
 @available(iOS 9.0, *)
 public class C29Application: NSObject {
@@ -27,43 +31,39 @@ public class C29Application: NSObject {
         case LoginComplete = "4. CULoginViewController - Login Complete"
     }
     
-    private let CopperKitApplicationType = "copperkit9"
-    private static let OpenHostName = "login" // expected: cu1234://login?
-    private var trackableParameters: [String:AnyObject] {
-        get {
-            return ["applicationId":(self._applicationId ?? "null")]
-        }
+    private enum QueryItems: String {
+        case ClientId = "client_id"
+        case Scope = "scope"
+        case ApplicationType = "application_type"
     }
-    private var _applicationId: String?
+    
+    private let CopperKitApplicationType = "copperkit9"
+    private static let OpenHostName = "login" // expected custom URL scheme like cu<applicationId>://login?
+
     private var coordinator: C29Coordinator? {
         didSet {
             self.mixpanel.identify(coordinator?.sessionId)
         }
     }
-    private var mixpanel = Mixpanel(token: MixPanelToken)
+    private var _applicationId: String?
     
-    // Instance variables specific to a single request
-    // TODO we may want to break these into their own struct if this gets more complicated
-    private var c29ViewController: C29ViewController?
-    private var completion: C29ApplicationUserInfoCompletionHandler?
-
     private var id: String? {
         get {
             return _applicationId
         }
     }
     
-    public var scopes: [C29Scope] = C29Scope.DefaultScopes // defaults
-    
-    public func configure(withApplicationId applicationId:String) {
-        C29Log(.Debug, "C29Application setting application id to \(applicationId)")
-        _applicationId = applicationId
-        coordinator = C29Coordinator(application: self)
+    private var trackableParameters: [String:AnyObject] {
+        get {
+            return ["applicationId":(self._applicationId ?? "null")]
+        }
     }
-
     
+    private var mixpanel = Mixpanel(token: MixPanelToken)
+    private var c29ViewController: C29ViewController?
+    private var completion: C29ApplicationUserInfoCompletionHandler?
+    public var scopes: [C29Scope] = C29Scope.DefaultScopes // defaults
     public var baseURL: String = "https://open.withcopper.com"
-    
     public var debug: Bool {
         didSet {
             if debug {
@@ -78,41 +78,36 @@ public class C29Application: NSObject {
         }
     }
     
-    enum QueryItems: String {
-        case ClientId = "client_id"
-        case Scope = "scope"
-        case ApplicationType = "application_type"
-    }
-    
     override init() {
         self.debug = false
     }
     
+    public func configureForApplication(applicationId: String) {
+        C29Log(.Debug, "C29Application setting application id to \(applicationId)")
+        _applicationId = applicationId
+        coordinator = C29Coordinator(application: self)
+    }
+    
     public func open(withViewController viewController: UIViewController, completion: C29ApplicationUserInfoCompletionHandler) {
-        
         C29Log(.Debug, "C29Application open with applicationId \(_applicationId ?? "null") and scopes \(C29Scope.getCommaDelinatedString(fromScopes: scopes))")
-        
         guard guaranteeConfigured() else {
             C29Log(.Error, Error.ApplicationIdNotSet.reason)
-            completion(userInfo: nil, error: Error.ApplicationIdNotSet.nserror)
+            completion(result: .Failure(Error.ApplicationIdNotSet.nserror))
             return
         }
-        
         // 1. check and see if we already have these records locally
         if let userInfo = coordinator?.userInfo,
             let records = userInfo.getRecords(forScopes: scopes) {
             C29Log(.Debug, "C29Application open() All \(records.count) requested records locally available.")
-            completion(userInfo: userInfo, error: nil)
+            completion(result: .Success(userInfo))
             return
         }
-        
         // We don't have local copies of the records, so let's make sure we're configured correctly.
         guard let u =  NSURL(string: "\(baseURL)/\(C29APIPath.OauthDialog.rawValue)") else {
             C29Log(.Error, "C29Application baseURL is invalid '\(baseURL)/\(C29APIPath.OauthDialog.rawValue)'")
-            completion(userInfo: nil, error: Error.InvalidConfiguration.nserror)
+            completion(result: .Failure(Error.InvalidConfiguration.nserror))
             return
         }
-        
         // let's make the call
         let urlComponents = NSURLComponents(URL: u, resolvingAgainstBaseURL: true)
         let queryClientId = NSURLQueryItem(name: QueryItems.ClientId.rawValue, value: self._applicationId)
@@ -120,10 +115,8 @@ public class C29Application: NSObject {
         let queryScope = NSURLQueryItem(name: QueryItems.Scope.rawValue, value: C29Scope.getCommaDelinatedString(fromScopes: scopes))
         urlComponents?.queryItems = [queryClientId, queryApplicationType, queryScope]
         let url = urlComponents?.URL!
-        
         // 3. Store our request related variables
         self.completion = completion
-        
         // 4. Display our view controller
         c29ViewController = C29ViewController(URL: url!)
         c29ViewController!.c29delegate = self
@@ -207,13 +200,18 @@ extension C29Application: C29ViewControllerDelegate {
     }
     internal func finish(userInfo: C29UserInfo?, error: NSError?) {
         self.c29ViewController?.dismissViewControllerAnimated(true, completion: {
-            self.completion?(userInfo: userInfo, error: error)
+            if let userInfo = userInfo {
+                self.completion?(result: .Success(userInfo))
+            } else if let error = error {
+                self.completion?(result: .Failure(error))
+            } else {
+                self.completion?(result: .UserCancelled)
+            }
             self.c29ViewController = nil
             self.completion = nil
         })
     }
 }
-
 
 @available(iOS 9.0, *)
 extension C29Application {
@@ -221,7 +219,6 @@ extension C29Application {
         case LoginError = 1
         case ApplicationIdNotSet = 2
         case InvalidConfiguration = 3
-
         
         public var reason: String {
             switch self {
