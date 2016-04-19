@@ -1,5 +1,5 @@
 //
-//  CUViewController
+//  CU29UserInfoViewController
 //  Copper
 //
 //  Created by Doug Williams on 3/2/16.
@@ -10,30 +10,27 @@ import UIKit
 import SafariServices
 
 @available(iOS 9.0, *)
-internal protocol C29ViewControllerDelegate: class {
-    func openURLReceived(notification: NSNotification, withC29ViewController: C29ViewController)
+internal protocol C29UserInfoViewControllerDelegate: class {
+    func openURLReceived(notification: NSNotification, withC29ViewController: C29UserInfoViewController)
     func trackEvent(event: C29Application.TrackingEvent)
     func finish(userInfo: C29UserInfo?, error: NSError?)
 }
 
 @available(iOS 9.0, *)
-public class C29ViewController: SFSafariViewController, SFSafariViewControllerDelegate {
+public class C29UserInfoViewController: SFSafariViewController, SFSafariViewControllerDelegate {
 
-    var c29delegate: C29ViewControllerDelegate?
+    var c29delegate: C29UserInfoViewControllerDelegate?
 
     override public func loadView() {
         self.c29delegate?.trackEvent(.LoginStarted)
-        if c29delegate == nil {
-            // not sure if this is set before or after so leavig this here to check
-            C29Log(.Warning, "MOVE Login.Started to viewDidLoad")
-        }
+        self.delegate = self
         super.loadView()
     }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: #selector(C29ViewController.loginLinkReceived(_:)),
+            selector: #selector(C29UserInfoViewController.loginLinkReceived(_:)),
             name: C29ApplicationLinkReceivedNotification,
             object: nil)
     }

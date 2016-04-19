@@ -25,7 +25,7 @@
 		F009BE991CBED69800EC8A47 /* C29API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE391CBED69700EC8A47 /* C29API.swift */; };
 		F009BE9A1CBED69800EC8A47 /* C29Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3A1CBED69700EC8A47 /* C29Application.swift */; };
 		F009BE9B1CBED69800EC8A47 /* C29Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */; };
-		F009BE9C1CBED69800EC8A47 /* C29Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3C1CBED69700EC8A47 /* C29Coordinator.swift */; };
+		F009BE9C1CBED69800EC8A47 /* C29UserInfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3C1CBED69700EC8A47 /* C29UserInfoCoordinator.swift */; };
 		F009BE9D1CBED69800EC8A47 /* C29CopperworksApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */; };
 		F009BE9E1CBED69800EC8A47 /* C29CopperworksApplicationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3E1CBED69700EC8A47 /* C29CopperworksApplicationCache.swift */; };
 		F009BE9F1CBED69800EC8A47 /* C29CopperworksApplicationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3F1CBED69700EC8A47 /* C29CopperworksApplicationDataSource.swift */; };
@@ -47,7 +47,7 @@
 		F009BEB01CBED69800EC8A47 /* C29UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE501CBED69700EC8A47 /* C29UserInfo.swift */; };
 		F009BEB11CBED69800EC8A47 /* C29Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE511CBED69700EC8A47 /* C29Utils.swift */; };
 		F009BEB21CBED69800EC8A47 /* C29Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE521CBED69700EC8A47 /* C29Verification.swift */; };
-		F009BEB31CBED69800EC8A47 /* C29ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE531CBED69700EC8A47 /* C29ViewController.swift */; };
+		F009BEB31CBED69800EC8A47 /* C29UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE531CBED69700EC8A47 /* C29UserInfoViewController.swift */; };
 		F009BEB41CBED69800EC8A47 /* ContactSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE541CBED69700EC8A47 /* ContactSource.swift */; };
 		F009BEB51CBED69800EC8A47 /* CopperAddressBookProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE551CBED69700EC8A47 /* CopperAddressBookProxy.swift */; };
 		F009BEB61CBED69800EC8A47 /* CopperAddressRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE561CBED69700EC8A47 /* CopperAddressRecord.swift */; };
@@ -125,7 +125,7 @@
 		F009BE391CBED69700EC8A47 /* C29API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29API.swift; sourceTree = "<group>"; };
 		F009BE3A1CBED69700EC8A47 /* C29Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Application.swift; sourceTree = "<group>"; };
 		F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Bytes.swift; sourceTree = "<group>"; };
-		F009BE3C1CBED69700EC8A47 /* C29Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Coordinator.swift; sourceTree = "<group>"; };
+		F009BE3C1CBED69700EC8A47 /* C29UserInfoCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29UserInfoCoordinator.swift; sourceTree = "<group>"; };
 		F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29CopperworksApplication.swift; sourceTree = "<group>"; };
 		F009BE3E1CBED69700EC8A47 /* C29CopperworksApplicationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29CopperworksApplicationCache.swift; path = CopperKit/C29CopperworksApplicationCache.swift; sourceTree = "<group>"; };
 		F009BE3F1CBED69700EC8A47 /* C29CopperworksApplicationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29CopperworksApplicationDataSource.swift; path = CopperKit/C29CopperworksApplicationDataSource.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		F009BE501CBED69700EC8A47 /* C29UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29UserInfo.swift; sourceTree = "<group>"; };
 		F009BE511CBED69700EC8A47 /* C29Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Utils.swift; sourceTree = "<group>"; };
 		F009BE521CBED69700EC8A47 /* C29Verification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Verification.swift; sourceTree = "<group>"; };
-		F009BE531CBED69700EC8A47 /* C29ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29ViewController.swift; sourceTree = "<group>"; };
+		F009BE531CBED69700EC8A47 /* C29UserInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29UserInfoViewController.swift; sourceTree = "<group>"; };
 		F009BE541CBED69700EC8A47 /* ContactSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSource.swift; sourceTree = "<group>"; };
 		F009BE551CBED69700EC8A47 /* CopperAddressBookProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopperAddressBookProxy.swift; sourceTree = "<group>"; };
 		F009BE561CBED69700EC8A47 /* CopperAddressRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopperAddressRecord.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 				F009BE391CBED69700EC8A47 /* C29API.swift */,
 				F009BE3A1CBED69700EC8A47 /* C29Application.swift */,
 				F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */,
-				F009BE3C1CBED69700EC8A47 /* C29Coordinator.swift */,
+				F009BE3C1CBED69700EC8A47 /* C29UserInfoCoordinator.swift */,
 				F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */,
 				F009BE401CBED69700EC8A47 /* C29IconProcessor.swift */,
 				F009BE431CBED69700EC8A47 /* C29Logger.swift */,
@@ -276,7 +276,7 @@
 				F009BE501CBED69700EC8A47 /* C29UserInfo.swift */,
 				F009BE511CBED69700EC8A47 /* C29Utils.swift */,
 				F009BE521CBED69700EC8A47 /* C29Verification.swift */,
-				F009BE531CBED69700EC8A47 /* C29ViewController.swift */,
+				F009BE531CBED69700EC8A47 /* C29UserInfoViewController.swift */,
 				F009BF001CBED8E100EC8A47 /* Contacts */,
 				F009BEFB1CBED7D400EC8A47 /* Vendor */,
 			);
@@ -560,7 +560,7 @@
 				F009BE981CBED69800EC8A47 /* Array+Copper.swift in Sources */,
 				F009BEB81CBED69800EC8A47 /* CopperContact.swift in Sources */,
 				F009BEAC1CBED69800EC8A47 /* C29Scope.swift in Sources */,
-				F009BEB31CBED69800EC8A47 /* C29ViewController.swift in Sources */,
+				F009BEB31CBED69800EC8A47 /* C29UserInfoViewController.swift in Sources */,
 				F009BEE91CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift in Sources */,
 				F009BECF1CBED69800EC8A47 /* NBMetadataCore.m in Sources */,
 				F009BEF31CBED69800EC8A47 /* UIImage+Copper.swift in Sources */,
@@ -613,7 +613,7 @@
 				F009BEA11CBED69800EC8A47 /* C29IdentityDataSource.swift in Sources */,
 				F009BEB71CBED69800EC8A47 /* CopperAvatarRecord.swift in Sources */,
 				F009BEAA1CBED69800EC8A47 /* C29RequestDataSource.swift in Sources */,
-				F009BE9C1CBED69800EC8A47 /* C29Coordinator.swift in Sources */,
+				F009BE9C1CBED69800EC8A47 /* C29UserInfoCoordinator.swift in Sources */,
 				F009BE991CBED69800EC8A47 /* C29API.swift in Sources */,
 				F009BEB21CBED69800EC8A47 /* C29Verification.swift in Sources */,
 				F009BEC81CBED69800EC8A47 /* JWTDecode.swift in Sources */,

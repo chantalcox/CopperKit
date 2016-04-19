@@ -1,5 +1,5 @@
 //
-//  C29Coordinator
+//  C29UserInfoCoordinator
 //  Copper
 //
 //  Created by Doug Williams on 3/3/16.
@@ -9,7 +9,7 @@
 import Foundation
 
 @available(iOS 9.0, *)
-public class C29Coordinator {
+public class C29UserInfoCoordinator {
     
     private let application: C29Application!
     private let networkAPI = CopperNetworkAPI()
@@ -71,7 +71,7 @@ public class C29Coordinator {
 }
 
 @available(iOS 9.0, *)
-extension C29Coordinator: CopperNetworkAPIDelegate {
+extension C29UserInfoCoordinator: CopperNetworkAPIDelegate {
 
     @objc public func authTokenForAPI(api: CopperNetworkAPI) -> String? {
         return self.jwt
@@ -106,7 +106,7 @@ extension C29Coordinator: CopperNetworkAPIDelegate {
 }
 
 @available(iOS 9.0, *)
-extension C29Coordinator {
+extension C29UserInfoCoordinator {
     
     public enum Error: Int {
         case MissingAccessTokenFound = 1

@@ -25,10 +25,10 @@ public class C29Application: NSObject {
     public static let sharedInstance = C29Application()
     
     public enum TrackingEvent: String {
-        case LoginStarted = "1. CULoginViewController - Login Started"
-        case LoginPageLoadComplete = "2. CULoginViewController - Login Page Load Complete"
-        case LoginRedirect = "3. CULoginViewController - Login Redirect"
-        case LoginComplete = "4. CULoginViewController - Login Complete"
+        case LoginStarted = "C29Application - 1. Login Started"
+        case LoginPageLoadComplete = "C29Application - 2. Login Page Load Complete"
+        case LoginRedirect = "C29Application - 3. Login Redirect"
+        case LoginComplete = "C29Application - 4. Login Complete"
     }
     
     private enum QueryItems: String {
@@ -40,7 +40,7 @@ public class C29Application: NSObject {
     private let CopperKitApplicationType = "copperkit9"
     private static let OpenHostName = "login" // expected custom URL scheme like cu<applicationId>://login?
 
-    private var coordinator: C29Coordinator? {
+    private var coordinator: C29UserInfoCoordinator? {
         didSet {
             self.mixpanel.identify(coordinator?.sessionId)
         }
@@ -60,7 +60,7 @@ public class C29Application: NSObject {
     }
     
     private var mixpanel = Mixpanel(token: MixPanelToken)
-    private var c29ViewController: C29ViewController?
+    private var c29ViewController: C29UserInfoViewController?
     private var completion: C29ApplicationUserInfoCompletionHandler?
     public var scopes: [C29Scope] = C29Scope.DefaultScopes // defaults
     public var baseURL: String = "https://open.withcopper.com"
@@ -85,7 +85,7 @@ public class C29Application: NSObject {
     public func configureForApplication(applicationId: String) {
         C29Log(.Debug, "C29Application setting application id to \(applicationId)")
         _applicationId = applicationId
-        coordinator = C29Coordinator(application: self)
+        coordinator = C29UserInfoCoordinator(application: self)
     }
     
     public func open(withViewController viewController: UIViewController, completion: C29ApplicationUserInfoCompletionHandler) {
@@ -118,7 +118,7 @@ public class C29Application: NSObject {
         // 3. Store our request related variables
         self.completion = completion
         // 4. Display our view controller
-        c29ViewController = C29ViewController(URL: url!)
+        c29ViewController = C29UserInfoViewController(URL: url!)
         c29ViewController!.c29delegate = self
         c29ViewController!.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
         viewController.presentViewController(c29ViewController!, animated: true, completion: {
@@ -127,7 +127,7 @@ public class C29Application: NSObject {
     }
     
     public func closeSession() {
-        coordinator = C29Coordinator(application: self)
+        coordinator = C29UserInfoCoordinator(application: self)
     }
     
     public func getPermittedScopes() -> [C29Scope]? {
@@ -180,8 +180,8 @@ public class C29Application: NSObject {
 }
 
 @available(iOS 9.0, *)
-extension C29Application: C29ViewControllerDelegate {
-    internal func openURLReceived(notification: NSNotification, withC29ViewController viewController: C29ViewController) {
+extension C29Application: C29UserInfoViewControllerDelegate {
+    internal func openURLReceived(notification: NSNotification, withC29ViewController viewController: C29UserInfoViewController) {
         C29Log(.Debug, "C29Application openURLReceived with notification \(notification)")
         self.trackEvent(.LoginRedirect)
         // we parse the returned URL from the notification
@@ -199,14 +199,14 @@ extension C29Application: C29ViewControllerDelegate {
         self.mixpanel.track(event.rawValue, parameters: self.trackableParameters)
     }
     internal func finish(userInfo: C29UserInfo?, error: NSError?) {
+        if let userInfo = userInfo {
+            self.completion?(result: .Success(userInfo))
+        } else if let error = error {
+            self.completion?(result: .Failure(error))
+        } else {
+            self.completion?(result: .UserCancelled)
+        }
         self.c29ViewController?.dismissViewControllerAnimated(true, completion: {
-            if let userInfo = userInfo {
-                self.completion?(result: .Success(userInfo))
-            } else if let error = error {
-                self.completion?(result: .Failure(error))
-            } else {
-                self.completion?(result: .UserCancelled)
-            }
             self.c29ViewController = nil
             self.completion = nil
         })
