@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIColor {
-
+    
     // MARK: - Identity Sheet
     
     public class func copper_IdentitySheetBackgroundColor() -> UIColor {
@@ -112,7 +112,7 @@ extension UIColor {
     public class func copper_ApplicationCardIconBorderColor() -> UIColor {
         return self.copper_black20()
     }
-
+    
     // MARK: - Request Action Sheet
     
     public class func copper_RequestSheetBackgroundColor() -> UIColor {
@@ -233,7 +233,7 @@ extension UIColor {
     }
     
     public class func copper_SettngsTableViewNavigationControllerBackColor() -> UIColor {
-         return self.copper_white().colorWithAlphaComponent(0.52)
+        return self.copper_white().colorWithAlphaComponent(0.52)
     }
     
     // MARK: - Contacts Picker
@@ -310,7 +310,7 @@ extension UIColor {
     public class func copper_RegistrationViewErrorTextColor() -> UIColor {
         return self.copper_primaryCopper()
     }
-
+    
     public class func copper_RegistrationViewBorderColor() -> UIColor {
         return self.copper_white20()
     }
@@ -327,7 +327,7 @@ extension UIColor {
         return self.hexStringToUIColor("#00D49F")
     }
     
-
+    
     // MARK: - Misc
     
     public class func copper_IdentityCellKeyboardToolbarTintColor() -> UIColor {
@@ -346,7 +346,7 @@ extension UIColor {
     
     
     // MARK: AuthControllerView Colors
-
+    
     public class func copper_AuthenticationControllerTitleColor() -> UIColor {
         return self.copper_white()
     }
@@ -390,7 +390,7 @@ extension UIColor {
     public class func copper_ModalCardBackgroundColor() -> UIColor {
         return self.copper_white()
     }
-
+    
     public class func copper_ModalCardTitleColor() -> UIColor {
         return self.copper_black92()
     }

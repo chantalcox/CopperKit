@@ -14,15 +14,11 @@ public class C29QRCode {
         case Code = "code"
         case URL = "url"
     }
-
-    public class func handleURL(url: NSURL, session: C29SessionDataSource, callback: ((success: Bool, error: NSError?)->())! = nil) {
-        C29QRCode.handleQRCodeURL(url, session: session, callback: callback)
-    }
     
     // returns true if the URL is in the correct format
     // callback is there to provide a facility to react to the success/error with the API request
     // TODO this should probably be converted into a class that looks more like C29OAuth.swift
-    private class func handleQRCodeURL(url: NSURL, session: C29SessionDataSource, callback: (success: Bool, error: NSError?)->()) {
+    public class func handleQRCodeURL(url: NSURL, session: C29SessionDataSource, callback: (success: Bool, error: NSError?)->()) {
         // example: https://open.withcopper.com/go?code=<code>
         var error = Error?()
         if let components = NSURLComponents(URL: url, resolvingAgainstBaseURL: true),
@@ -31,11 +27,14 @@ public class C29QRCode {
                 case "open.withcopper.com", "open-staging.withcopper.com", "api-staging.withcopper.com", "api.withcopper.com":
                     if url.path == "/go" {
                         if let code = components.getQueryStringParameter(C29QRCode.Key.Code.rawValue) {
-                            session.sessionCoordinator?.getURLforCode(code, callback: { (url: AnyObject?, error: NSError?) -> () in
-                                if let url = url as? NSURL {
+                            session.sessionCoordinator?.getURLforCode(code, callback: { (url: NSURL?, error: NSError?) -> () in
+                                if let url = url {
                                     C29OAuth.handleURL(url, session: session, callback: callback)
+                                } else {
+                                    callback(success: false, error: error)
                                 }
                             })
+                            return
                         } else {
                             error = C29QRCode.Error.Code
                         }

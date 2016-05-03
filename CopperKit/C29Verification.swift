@@ -8,28 +8,63 @@
 
 import Foundation
 
-@objc public class C29VerificationCode: NSObject {
+public let C29VerificationCodeExpiry: NSTimeInterval = 120.0
+
+public class C29VerificationCode: NSObject {
     
-    @objc enum Key: Int {
-        case Code = 1
-        
-        var value: String {
-            switch self {
-            case Code:
-                return "code"
-            }
-        }
+    enum Key: String {
+        case Code = "code"
+        case Digits = "digits"
+        case Timestamp = "timestamp"
     }
     
     public var code: String
+    public var digits: String?
+    public var timestamp: NSDate?
     
-    init(code: String) {
-        self.code = code
+    public var expires: NSDate? {
+        get {
+            guard let timestamp = timestamp else {
+                return nil
+            }
+            return timestamp.dateByAddingTimeInterval(C29VerificationCodeExpiry)
+        }
     }
     
+    public var expired: Bool {
+        get {
+            guard let timestamp = timestamp else {
+                return false
+            }
+            return (timestamp.timeIntervalSince1970 < NSDate().timeIntervalSince1970 - C29VerificationCodeExpiry)
+        }
+    }
+    
+    public init(code: String, digits: String! = nil, timestamp: NSDate! = nil) {
+        self.code = code
+        self.digits = digits
+        self.timestamp = timestamp
+    }
+    
+    public var dictionary: NSDictionary {
+        get {
+            var d = [String: AnyObject]()
+            d[Key.Code.rawValue] = self.code
+            d[Key.Digits.rawValue] = self.digits
+            d[Key.Timestamp.rawValue] = self.timestamp?.timeIntervalSinceNow
+            return d
+        }
+    }
+
     public class func fromDictionary(dataDict: NSDictionary) -> C29VerificationCode? {
-        if let code = dataDict[Key.Code.value] as? String {
-            return C29VerificationCode(code: code)
+        if let code = dataDict[Key.Code.rawValue] as? String {
+            let verificationCode = C29VerificationCode(code: code)
+            // As part of the Login flow, we get two optional pieces of data
+            verificationCode.digits = dataDict[Key.Digits.rawValue] as? String
+            if let timestamp  = dataDict[Key.Timestamp.rawValue] as? Int {
+                verificationCode.timestamp = NSDate(timeIntervalSince1970: NSTimeInterval(timestamp))
+            }
+            return verificationCode
         }
         C29LogWithRemote(.Critical, error: C29VerificationError.InvalidFormat.nserror, infoDict: dataDict as! [String : AnyObject])
         return C29VerificationCode?()
@@ -67,18 +102,62 @@ public class C29VerificationResult {
         C29LogWithRemote(.Critical, error: C29VerificationError.InvalidFormat.nserror, infoDict: dataDict as! [String : AnyObject])
         return C29VerificationResult?()
     }
+    
+    public class func fromAPIResult(result: C29APIResult<NSHTTPURLResponse, NSDictionary?, NSError>, callback: (verificationResult: C29VerificationResult?, error: NSError?)->()) {
+        switch result {
+        case let .Error(error):
+            callback(verificationResult: nil, error: error)
+            return
+        case let .Success(response, dataDict):
+            switch response.statusCode {
+            // Verification errors
+            case 401:
+                callback(verificationResult: nil, error: C29VerificationError.DialogCodeInvalid.nserror)
+                return
+            case 419:
+                callback(verificationResult: nil, error: C29VerificationError.DialogCodeExpired.nserror)
+                return
+            case 429:
+                callback(verificationResult: nil, error: C29VerificationError.DialogCodeLocked.nserror)
+            return
+            // Success
+            case 200, 201:
+                guard let dataDict = dataDict else {
+                    callback(verificationResult: nil, error: C29VerificationError.DialogCodeMissing.nserror)
+                    return
+                }
+                let verificationResult = C29VerificationResult.fromDictionary(dataDict)
+                callback(verificationResult: verificationResult, error: nil)
+            default:
+                callback(verificationResult: nil, error: nil)
+            }
+        }
+    }
 }
 
-enum C29VerificationError: Int {
+public enum C29VerificationError: Int {
     case InvalidFormat = 1
+    // Dialog errors
+    case DialogCodeExpired = 227888
+    case DialogCodeLocked = 237888
+    case DialogCodeInvalid = 247888
+    case DialogCodeMissing = 257888
 
     var reason: String {
         switch self {
         case InvalidFormat:
             return "C29Verification.fromDictionary failed because some required data was omitted or in the wrong format"
+        case DialogCodeExpired:
+            return "That code is expired. Try again."
+        case DialogCodeLocked:
+            return "That code is locked. Try again."
+        case DialogCodeInvalid:
+            return "Wrong code."
+        case .DialogCodeMissing:
+            return "Unexpected error"
         }
     }
-    var nserror: NSError {
+    public var nserror: NSError {
         return NSError(domain: self.domain, code: self.rawValue, userInfo: [NSLocalizedFailureReasonErrorKey: self.reason])
     }
     var domain: String {

@@ -45,23 +45,33 @@ public class C29UserInfoCoordinator {
         }
         
         let url = NSURL(string: "\(networkAPI.URL)/\(C29APIPath.OauthUserinfo.rawValue)")!
-        networkAPI.makeHTTPRequest(C29APIMethod.GET_USERINFO,
-            callback: { dataDict, error in
-                guard error == nil else {
-                    callback(userInfo: nil, error: error)
-                    return
-                }
-                guard let dataDict = dataDict as? NSDictionary else {
-                    callback(userInfo: nil, error: Error.RecordsDictInvalidFormat.nserror)
-                    return
-                }
-                self.userInfo?.fromDictionary(dataDict, callback: {(newUserInfo: C29UserInfo?, error: NSError?) in
-                    callback?(userInfo: self.userInfo, error: error)
-                })
-            },
-            url: url,
-            httpMethod: HTTPMethod.GET,
-            authentication: true)
+        
+        
+        let request = CopperNetworkAPIRequest(method: .GET_USERINFO,
+                                              httpMethod: .GET,
+                                              url: url,
+                                              authentication: true,
+                                              params: nil,
+                                              callback: { (result: C29APIResult) in
+                                                switch result {
+                                                case let .Error(error):
+                                                    callback(userInfo: nil, error: error)
+                                                case let .Success(response, dataDict):
+                                                    guard response.statusCode == 200 else {
+                                                        callback(userInfo: nil, error: Error.InvalidHTTPResponseCode.nserror)
+                                                        return
+                                                    }
+                                                    guard let dataDict = dataDict else {
+                                                        callback(userInfo: nil, error: Error.RecordsDictInvalidFormat.nserror)
+                                                        return
+                                                    }
+                                                    self.userInfo?.fromDictionary(dataDict, callback: {(newUserInfo: C29UserInfo?, error: NSError?) in
+                                                        callback?(userInfo: self.userInfo, error: error)
+                                                    })
+                                                
+                                                }
+        })
+        networkAPI.makeHTTPRequest(request)
     }
     
     func getPermittedScopes() -> [C29Scope]? {
@@ -114,6 +124,7 @@ extension C29UserInfoCoordinator {
         case ApplicationIdNotSet = 3
         case RecordsDictInvalidFormat = 4
         case AuthError = 5
+        case InvalidHTTPResponseCode = 6
         
         public var reason: String {
             switch self {
@@ -127,6 +138,8 @@ extension C29UserInfoCoordinator {
                 return "The API returned data in an invalid format"
             case .AuthError:
                 return "The API returned an auth error -- jwt is potentially expired -- TODO implement better handling"
+            case .InvalidHTTPResponseCode:
+                return "How embarassing. We recieved an unexpected error from the server."
             }
         }
         var description: String {

@@ -8,6 +8,25 @@
 import Foundation
 import SystemConfiguration
 
+@objc public class CopperNetworkAPIRequest: NSObject {
+    public let method: C29APIMethod
+    public let callback: C29APIResultCallback
+    public let url: NSURL
+    public let httpMethod: HTTPMethod
+    public var params = [String:AnyObject]?()
+    public var authentication = false
+    public var retries = 3
+    
+    public init(method: C29APIMethod, httpMethod: HTTPMethod, url: NSURL, authentication: Bool = false, params: [String:AnyObject]! = nil, callback: C29APIResultCallback) {
+        self.method = method
+        self.httpMethod = httpMethod
+        self.url = url
+        self.authentication = authentication
+        self.params = params
+        self.callback = callback
+    }
+}
+
 public class CopperNetworkAPI: NSObject, C29API {
     
     public weak var delegate: CopperNetworkAPIDelegate?
@@ -24,40 +43,41 @@ public class CopperNetworkAPI: NSObject, C29API {
     var session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
 
     // Our workhorse method, though you shouldn't need to call this directly.
-    public func makeHTTPRequest(method: C29APIMethod, callback: C29APICallback, url: NSURL, httpMethod: HTTPMethod, params: [String: AnyObject]! = nil, authentication: Bool = true, retries: Int = 1) {
-        C29Log(.Debug, "CopperAPI >> HTTP \(httpMethod.rawValue) \(url)")
+    public func makeHTTPRequest(apiRequest: CopperNetworkAPIRequest) {
+        C29Log(.Debug, "CopperAPI >> HTTP \(apiRequest.httpMethod.rawValue) \(apiRequest.url)")
         
         guard Reachability.isConnectedToNetwork() else {
             dispatch_async(dispatch_get_main_queue()) {
-                callback(nil, C29NetworkAPIError.Disconnected.nserror)
+                apiRequest.callback(result: .Error(C29NetworkAPIError.Disconnected.nserror))
             }
             return ()
         }
         
         // Request setup
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = httpMethod.rawValue
+        let request = NSMutableURLRequest(URL: apiRequest.url)
+        request.HTTPMethod = apiRequest.httpMethod.rawValue
         
         // Handle authenticaiton requirements and reauth as necessary
-        if authentication {
+        if apiRequest.authentication {
             // If we have our authToken, proceed
             if let token = self.authToken {
                 request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                 // If there are authentication retries left, then let's use them
-            } else if retries > 0 {
-                attemptLoginThenRetryHTTPRequest(method, callback: callback, url: url, httpMethod: httpMethod, params: params, authentication: authentication, retries: retries)
+            } else if apiRequest.retries > 0 {
+                attemptLoginThenRetryHTTPRequest(apiRequest)
                 return
                 // No retries left and we're still unauthed
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
-                    C29LogWithRemote(.Error, error: C29NetworkAPIError.Auth.nserror, infoDict: params)
-                    callback(nil, C29NetworkAPIError.Auth.nserror)
+                    C29LogWithRemote(.Error, error: C29NetworkAPIError.Auth.nserror, infoDict: apiRequest.params)
+                    apiRequest.callback(result: .Error(C29NetworkAPIError.Auth.nserror))
+                    return
                 }
             }
         }
 
         // Add any parameters to the request body as necessary
-        if params != nil {
+        if let params = apiRequest.params {
             do {
                 request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
                 let json = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions())
@@ -67,9 +87,9 @@ public class CopperNetworkAPI: NSObject, C29API {
                 }
             } catch {
                 let error = C29NetworkAPIError.JsonInvalid.nserror
-                C29LogWithRemote(.Error, error: error, infoDict: params)
+                C29LogWithRemote(.Error, error: error, infoDict: apiRequest.params)
                 dispatch_async(dispatch_get_main_queue()) {
-                    callback(nil, error)
+                    apiRequest.callback(result: .Error(error))
                 }
             }
         }
@@ -92,64 +112,37 @@ public class CopperNetworkAPI: NSObject, C29API {
             dispatch_async(dispatch_get_main_queue()) {
                 // exit early with any network / system error
                 guard error == nil else {
-                    callback(nil, self.handleError((response as? NSHTTPURLResponse), dataDict: dataDict))
+                    apiRequest.callback(result: .Error(error!))
                     return ()
                 }
             
                 // otherwise attempt to parse our response
                 if let httpResponse = response as? NSHTTPURLResponse {
-                    let res = self.handleResponse(method, response: httpResponse, dataDict: dataDict)
-                    if let error = res.error as NSError? {
-                        // We want to automatically retry if retries are available... and we're not attempted a JWT refresh already :)
-                        if error == C29NetworkAPIError.Auth.nserror && retries > 0 && method != .GET_JWT {
-                            self.attemptLoginThenRetryHTTPRequest(method, callback: callback, url: url, httpMethod: httpMethod, params: params, authentication: authentication, retries: retries)
-                            return
-                        }
+                    // We want to automatically retry if retries are available... and we're not attempted a JWT refresh already :)
+                    if httpResponse.statusCode == 401 && apiRequest.retries > 0 && apiRequest.method != .GET_JWT && apiRequest.method != .DIALOG_VERIFY_CODE {
+                        self.attemptLoginThenRetryHTTPRequest(apiRequest)
+                        return
                     }
-                    
-                    callback(res.data, res.error)
+                    apiRequest.callback(result: .Success(httpResponse, dataDict))
                 }
             }
         }
         task.resume()
     }
     
-    private func attemptLoginThenRetryHTTPRequest(method: C29APIMethod, callback: C29APICallback, url: NSURL, httpMethod: HTTPMethod, params: [String: AnyObject]! = nil, authentication: Bool = true, retries: Int = 1) {
-        C29Log(.Debug, "CopperAPI >> attemping C29User.login with \(retries) retries")
-        let tries = retries - 1
+    private func attemptLoginThenRetryHTTPRequest(apiRequest: CopperNetworkAPIRequest) {
+        C29Log(.Debug, "CopperAPI >> attemping C29User.login with \(apiRequest.retries) retries")
+        apiRequest.retries = apiRequest.retries-1
         delegate!.networkAPI(self, attemptLoginWithCallback: { (success, error) -> () in
             if success {
-                self.makeHTTPRequest(method, callback: callback, url: url, httpMethod: httpMethod, params: params, authentication: authentication, retries: tries)
+                self.makeHTTPRequest(apiRequest)
             } else {
                 C29Log(.Debug, "CopperAPI >> error retrieving authToken")
                 dispatch_async(dispatch_get_main_queue()) {
-                    callback(nil, error)
+                    apiRequest.callback(result: .Error(error!))
                 }
             }
         })
-    }
-
-    public func handleResponse(method: C29APIMethod, response: NSHTTPURLResponse, dataDict: NSDictionary! = nil) -> (data: AnyObject?, error: NSError?) {
-        // This method should be much more fleshed out in actual implementation classes
-        var result:AnyObject?
-        var error:NSError?
-        switch(response.statusCode) {
-        // Success handling
-        case 200, 201:
-            result = dataDict
-        // An error was (likely) returned
-        default:
-            error = self.handleError(response, dataDict: dataDict)
-        }
-        return (data: result, error: error)
-    }
-    
-    // Create and return an NSError message that is expected and meaningful to the caller
-    public func handleError(response: NSHTTPURLResponse! = nil, dataDict: NSDictionary! = nil) -> NSError {
-        let errorMsg: String = (dataDict?["message"] as? String) ?? "Our computers are having troubles talking to one another. Please try again soon." // our
-        // TODO capture the {code: internal_code} sub-json
-        let code = response?.statusCode ?? -29 // -29 is unknown
-        return NSError(domain: C29NetworkAPIError.HTTPStatusCode.domain, code: code, userInfo:["message": errorMsg])
     }
 
 }
@@ -188,11 +181,6 @@ public enum C29NetworkAPIError: Int {
     case CopperAPIDown = 4
     case HTTPStatusCode = 5
     
-    // Dialog errors
-    case DialogCodeExpired = 22
-    case DialogCodeLocked = 23
-    case DialogCodeInvalid = 24
-    
     var reason: String {
         switch self {
         case Disconnected:
@@ -207,12 +195,6 @@ public enum C29NetworkAPIError: Int {
             return "Copper is down"
         case HTTPStatusCode:
             return "Unexpected HTTP Status code"
-        case DialogCodeExpired:
-            return "That code is expired. Try again."
-        case DialogCodeLocked:
-            return "That code is locked. Try again."
-        case DialogCodeInvalid:
-            return "Wrong code."
         }
     }
     var description: String {

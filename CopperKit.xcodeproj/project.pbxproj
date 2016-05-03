@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F009BE981CBED69800EC8A47 /* Array+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE381CBED69700EC8A47 /* Array+Copper.swift */; };
 		F009BE991CBED69800EC8A47 /* C29API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE391CBED69700EC8A47 /* C29API.swift */; };
 		F009BE9A1CBED69800EC8A47 /* C29Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3A1CBED69700EC8A47 /* C29Application.swift */; };
 		F009BE9B1CBED69800EC8A47 /* C29Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */; };
@@ -29,7 +28,6 @@
 		F009BE9D1CBED69800EC8A47 /* C29CopperworksApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */; };
 		F009BE9E1CBED69800EC8A47 /* C29CopperworksApplicationCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3E1CBED69700EC8A47 /* C29CopperworksApplicationCache.swift */; };
 		F009BE9F1CBED69800EC8A47 /* C29CopperworksApplicationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE3F1CBED69700EC8A47 /* C29CopperworksApplicationDataSource.swift */; };
-		F009BEA01CBED69800EC8A47 /* C29IconProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE401CBED69700EC8A47 /* C29IconProcessor.swift */; };
 		F009BEA11CBED69800EC8A47 /* C29IdentityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE411CBED69700EC8A47 /* C29IdentityDataSource.swift */; };
 		F009BEA21CBED69800EC8A47 /* C29ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE421CBED69700EC8A47 /* C29ImageCache.swift */; };
 		F009BEA31CBED69800EC8A47 /* C29Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE431CBED69700EC8A47 /* C29Logger.swift */; };
@@ -61,13 +59,9 @@
 		F009BEBF1CBED69800EC8A47 /* CopperRecordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE5F1CBED69800EC8A47 /* CopperRecordObject.swift */; };
 		F009BEC01CBED69800EC8A47 /* CopperSignatureRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE601CBED69800EC8A47 /* CopperSignatureRecord.swift */; };
 		F009BEC11CBED69800EC8A47 /* CopperUsernameRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE611CBED69800EC8A47 /* CopperUsernameRecord.swift */; };
-		F009BEC21CBED69800EC8A47 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009BE621CBED69800EC8A47 /* Crashlytics.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F009BEC31CBED69800EC8A47 /* Enum+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE631CBED69800EC8A47 /* Enum+Copper.swift */; };
 		F009BEC41CBED69800EC8A47 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE641CBED69800EC8A47 /* Errors.swift */; };
-		F009BEC51CBED69800EC8A47 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009BE651CBED69800EC8A47 /* Fabric.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F009BEC71CBED69800EC8A47 /* JWT.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE671CBED69800EC8A47 /* JWT.swift */; };
 		F009BEC81CBED69800EC8A47 /* JWTDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE681CBED69800EC8A47 /* JWTDecode.swift */; };
-		F009BEC91CBED69800EC8A47 /* LAContext+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE691CBED69800EC8A47 /* LAContext+Copper.swift */; };
 		F009BECA1CBED69800EC8A47 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE6A1CBED69800EC8A47 /* Loadable.swift */; };
 		F009BECB1CBED69800EC8A47 /* Mixpanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE6B1CBED69800EC8A47 /* Mixpanel.swift */; };
 		F009BECC1CBED69800EC8A47 /* NBAsYouTypeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = F009BE6C1CBED69800EC8A47 /* NBAsYouTypeFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -97,31 +91,23 @@
 		F009BEE41CBED69800EC8A47 /* NBPhoneNumberUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F009BE841CBED69800EC8A47 /* NBPhoneNumberUtil.m */; };
 		F009BEE51CBED69800EC8A47 /* NSArray+NBAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F009BE851CBED69800EC8A47 /* NSArray+NBAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F009BEE61CBED69800EC8A47 /* NSArray+NBAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F009BE861CBED69800EC8A47 /* NSArray+NBAdditions.m */; };
-		F009BEE71CBED69800EC8A47 /* NSDate+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE871CBED69800EC8A47 /* NSDate+Copper.swift */; };
-		F009BEE81CBED69800EC8A47 /* NSError+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE881CBED69800EC8A47 /* NSError+Copper.swift */; };
-		F009BEE91CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE891CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift */; };
-		F009BEEA1CBED69800EC8A47 /* NSObject+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE8A1CBED69800EC8A47 /* NSObject+Copper.swift */; };
-		F009BEEB1CBED69800EC8A47 /* NSURL+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE8B1CBED69800EC8A47 /* NSURL+Copper.swift */; };
 		F009BEEC1CBED69800EC8A47 /* Saveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE8C1CBED69800EC8A47 /* Saveable.swift */; };
 		F009BEED1CBED69800EC8A47 /* SFHFKeychainUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F009BE8D1CBED69800EC8A47 /* SFHFKeychainUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F009BEEE1CBED69800EC8A47 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F009BE8E1CBED69800EC8A47 /* SFHFKeychainUtils.m */; };
-		F009BEF01CBED69800EC8A47 /* UIButton+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE901CBED69800EC8A47 /* UIButton+Copper.swift */; };
-		F009BEF11CBED69800EC8A47 /* UIColor+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE911CBED69800EC8A47 /* UIColor+Copper.swift */; };
-		F009BEF21CBED69800EC8A47 /* UIFont+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE921CBED69800EC8A47 /* UIFont+Copper.swift */; };
-		F009BEF31CBED69800EC8A47 /* UIImage+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE931CBED69800EC8A47 /* UIImage+Copper.swift */; };
-		F009BEF41CBED69800EC8A47 /* UITableView+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE941CBED69800EC8A47 /* UITableView+Copper.swift */; };
-		F009BEF51CBED69800EC8A47 /* UITextField+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE951CBED69800EC8A47 /* UITextField+Copper.swift */; };
-		F009BEF61CBED69800EC8A47 /* UITextView+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE961CBED69800EC8A47 /* UITextView+Copper.swift */; };
-		F009BEF71CBED69800EC8A47 /* UIView+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009BE971CBED69800EC8A47 /* UIView+Copper.swift */; };
 		F009C0921CBEF05200EC8A47 /* CopperKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F009C0321CBEF05200EC8A47 /* CopperKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F03EB3B51CC6A3C8003C4506 /* C29Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EB3B41CC6A3C8003C4506 /* C29Networking.swift */; };
+		F053A9451CC816180047B079 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009BE621CBED69800EC8A47 /* Crashlytics.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F053A9461CC8161A0047B079 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F009BE651CBED69800EC8A47 /* Fabric.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F06C4EB91CC6E7C80053AAE3 /* String+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C4EB81CC6E7C80053AAE3 /* String+Copper.swift */; };
+		F06C4EBD1CC6E8400053AAE3 /* NSURL+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C4EBC1CC6E8400053AAE3 /* NSURL+Copper.swift */; };
+		F06C4EC11CC6E8C40053AAE3 /* UIColor+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C4EC01CC6E8C40053AAE3 /* UIColor+Copper.swift */; };
+		F06C4EC51CC6EA0E0053AAE3 /* Array+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C4EC41CC6EA0E0053AAE3 /* Array+Copper.swift */; };
+		F06C4EC71CC6EA400053AAE3 /* UIImage+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06C4EC61CC6EA400053AAE3 /* UIImage+Copper.swift */; };
 		F0E7A8F21CBF30530009D5A5 /* C29SessionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E7A8F11CBF30530009D5A5 /* C29SessionDataSource.swift */; };
-		F0E7A8F41CBF30790009D5A5 /* String+Copper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E7A8F31CBF30790009D5A5 /* String+Copper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F009BE271CBED61500EC8A47 /* CopperKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CopperKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F009BE381CBED69700EC8A47 /* Array+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Copper.swift"; path = "CopperKit/Array+Copper.swift"; sourceTree = "<group>"; };
 		F009BE391CBED69700EC8A47 /* C29API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29API.swift; sourceTree = "<group>"; };
 		F009BE3A1CBED69700EC8A47 /* C29Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Application.swift; sourceTree = "<group>"; };
 		F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Bytes.swift; sourceTree = "<group>"; };
@@ -129,7 +115,6 @@
 		F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29CopperworksApplication.swift; sourceTree = "<group>"; };
 		F009BE3E1CBED69700EC8A47 /* C29CopperworksApplicationCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29CopperworksApplicationCache.swift; path = CopperKit/C29CopperworksApplicationCache.swift; sourceTree = "<group>"; };
 		F009BE3F1CBED69700EC8A47 /* C29CopperworksApplicationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29CopperworksApplicationDataSource.swift; path = CopperKit/C29CopperworksApplicationDataSource.swift; sourceTree = "<group>"; };
-		F009BE401CBED69700EC8A47 /* C29IconProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29IconProcessor.swift; sourceTree = "<group>"; };
 		F009BE411CBED69700EC8A47 /* C29IdentityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29IdentityDataSource.swift; path = CopperKit/C29IdentityDataSource.swift; sourceTree = "<group>"; };
 		F009BE421CBED69700EC8A47 /* C29ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29ImageCache.swift; path = CopperKit/C29ImageCache.swift; sourceTree = "<group>"; };
 		F009BE431CBED69700EC8A47 /* C29Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C29Logger.swift; sourceTree = "<group>"; };
@@ -162,12 +147,10 @@
 		F009BE601CBED69800EC8A47 /* CopperSignatureRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopperSignatureRecord.swift; sourceTree = "<group>"; };
 		F009BE611CBED69800EC8A47 /* CopperUsernameRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopperUsernameRecord.swift; sourceTree = "<group>"; };
 		F009BE621CBED69800EC8A47 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		F009BE631CBED69800EC8A47 /* Enum+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Enum+Copper.swift"; path = "CopperKit/Enum+Copper.swift"; sourceTree = "<group>"; };
 		F009BE641CBED69800EC8A47 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F009BE651CBED69800EC8A47 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F009BE671CBED69800EC8A47 /* JWT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		F009BE681CBED69800EC8A47 /* JWTDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTDecode.swift; sourceTree = "<group>"; };
-		F009BE691CBED69800EC8A47 /* LAContext+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "LAContext+Copper.swift"; path = "CopperKit/LAContext+Copper.swift"; sourceTree = "<group>"; };
 		F009BE6A1CBED69800EC8A47 /* Loadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Loadable.swift; path = CopperKit/Loadable.swift; sourceTree = "<group>"; };
 		F009BE6B1CBED69800EC8A47 /* Mixpanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mixpanel.swift; sourceTree = "<group>"; };
 		F009BE6C1CBED69800EC8A47 /* NBAsYouTypeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBAsYouTypeFormatter.h; sourceTree = "<group>"; };
@@ -197,27 +180,18 @@
 		F009BE841CBED69800EC8A47 /* NBPhoneNumberUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPhoneNumberUtil.m; sourceTree = "<group>"; };
 		F009BE851CBED69800EC8A47 /* NSArray+NBAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+NBAdditions.h"; sourceTree = "<group>"; };
 		F009BE861CBED69800EC8A47 /* NSArray+NBAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+NBAdditions.m"; sourceTree = "<group>"; };
-		F009BE871CBED69800EC8A47 /* NSDate+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+Copper.swift"; path = "CopperKit/NSDate+Copper.swift"; sourceTree = "<group>"; };
-		F009BE881CBED69800EC8A47 /* NSError+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSError+Copper.swift"; path = "CopperKit/NSError+Copper.swift"; sourceTree = "<group>"; };
-		F009BE891CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSLayoutConstraint+Copper.swift"; path = "CopperKit/NSLayoutConstraint+Copper.swift"; sourceTree = "<group>"; };
-		F009BE8A1CBED69800EC8A47 /* NSObject+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSObject+Copper.swift"; path = "CopperKit/NSObject+Copper.swift"; sourceTree = "<group>"; };
-		F009BE8B1CBED69800EC8A47 /* NSURL+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Copper.swift"; path = "CopperKit/NSURL+Copper.swift"; sourceTree = "<group>"; };
 		F009BE8C1CBED69800EC8A47 /* Saveable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Saveable.swift; path = CopperKit/Saveable.swift; sourceTree = "<group>"; };
 		F009BE8D1CBED69800EC8A47 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		F009BE8E1CBED69800EC8A47 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFHFKeychainUtils.m; sourceTree = "<group>"; };
-		F009BE901CBED69800EC8A47 /* UIButton+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIButton+Copper.swift"; path = "CopperKit/UIButton+Copper.swift"; sourceTree = "<group>"; };
-		F009BE911CBED69800EC8A47 /* UIColor+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Copper.swift"; path = "CopperKit/UIColor+Copper.swift"; sourceTree = "<group>"; };
-		F009BE921CBED69800EC8A47 /* UIFont+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIFont+Copper.swift"; path = "CopperKit/UIFont+Copper.swift"; sourceTree = "<group>"; };
-		F009BE931CBED69800EC8A47 /* UIImage+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Copper.swift"; path = "CopperKit/UIImage+Copper.swift"; sourceTree = "<group>"; };
-		F009BE941CBED69800EC8A47 /* UITableView+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITableView+Copper.swift"; path = "CopperKit/UITableView+Copper.swift"; sourceTree = "<group>"; };
-		F009BE951CBED69800EC8A47 /* UITextField+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextField+Copper.swift"; path = "CopperKit/UITextField+Copper.swift"; sourceTree = "<group>"; };
-		F009BE961CBED69800EC8A47 /* UITextView+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UITextView+Copper.swift"; path = "CopperKit/UITextView+Copper.swift"; sourceTree = "<group>"; };
-		F009BE971CBED69800EC8A47 /* UIView+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Copper.swift"; path = "CopperKit/UIView+Copper.swift"; sourceTree = "<group>"; };
 		F009C0321CBEF05200EC8A47 /* CopperKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CopperKit.h; path = CopperKit/CopperKit.h; sourceTree = "<group>"; };
 		F009C03C1CBEF05200EC8A47 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CopperKit/Info.plist; sourceTree = "<group>"; };
 		F03EB3B41CC6A3C8003C4506 /* C29Networking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29Networking.swift; path = CopperKit/C29Networking.swift; sourceTree = "<group>"; };
+		F06C4EB81CC6E7C80053AAE3 /* String+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Copper.swift"; path = "CopperKit/String+Copper.swift"; sourceTree = "<group>"; };
+		F06C4EBC1CC6E8400053AAE3 /* NSURL+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Copper.swift"; path = "CopperKit/NSURL+Copper.swift"; sourceTree = "<group>"; };
+		F06C4EC01CC6E8C40053AAE3 /* UIColor+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Copper.swift"; path = "CopperKit/UIColor+Copper.swift"; sourceTree = "<group>"; };
+		F06C4EC41CC6EA0E0053AAE3 /* Array+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+Copper.swift"; path = "CopperKit/Array+Copper.swift"; sourceTree = "<group>"; };
+		F06C4EC61CC6EA400053AAE3 /* UIImage+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Copper.swift"; path = "CopperKit/UIImage+Copper.swift"; sourceTree = "<group>"; };
 		F0E7A8F11CBF30530009D5A5 /* C29SessionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = C29SessionDataSource.swift; path = CopperKit/C29SessionDataSource.swift; sourceTree = "<group>"; };
-		F0E7A8F31CBF30790009D5A5 /* String+Copper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Copper.swift"; path = "CopperKit/String+Copper.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,8 +199,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F009BEC21CBED69800EC8A47 /* Crashlytics.framework in Frameworks */,
-				F009BEC51CBED69800EC8A47 /* Fabric.framework in Frameworks */,
+				F053A9451CC816180047B079 /* Crashlytics.framework in Frameworks */,
+				F053A9461CC8161A0047B079 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +237,6 @@
 				F009BE3B1CBED69700EC8A47 /* C29Bytes.swift */,
 				F009BE3C1CBED69700EC8A47 /* C29UserInfoCoordinator.swift */,
 				F009BE3D1CBED69700EC8A47 /* C29CopperworksApplication.swift */,
-				F009BE401CBED69700EC8A47 /* C29IconProcessor.swift */,
 				F009BE431CBED69700EC8A47 /* C29Logger.swift */,
 				F009BE441CBED69700EC8A47 /* C29NetworkActivityRegistry.swift */,
 				F009BE451CBED69700EC8A47 /* C29OAuth.swift */,
@@ -287,23 +260,11 @@
 		F009BEF81CBED75C00EC8A47 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F009BE631CBED69800EC8A47 /* Enum+Copper.swift */,
-				F009BE691CBED69800EC8A47 /* LAContext+Copper.swift */,
-				F009BE871CBED69800EC8A47 /* NSDate+Copper.swift */,
-				F009BE881CBED69800EC8A47 /* NSError+Copper.swift */,
-				F009BE891CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift */,
-				F009BE8A1CBED69800EC8A47 /* NSObject+Copper.swift */,
-				F009BE8B1CBED69800EC8A47 /* NSURL+Copper.swift */,
-				F009BE901CBED69800EC8A47 /* UIButton+Copper.swift */,
-				F009BE911CBED69800EC8A47 /* UIColor+Copper.swift */,
-				F009BE921CBED69800EC8A47 /* UIFont+Copper.swift */,
-				F009BE931CBED69800EC8A47 /* UIImage+Copper.swift */,
-				F009BE941CBED69800EC8A47 /* UITableView+Copper.swift */,
-				F009BE951CBED69800EC8A47 /* UITextField+Copper.swift */,
-				F009BE961CBED69800EC8A47 /* UITextView+Copper.swift */,
-				F009BE971CBED69800EC8A47 /* UIView+Copper.swift */,
-				F009BE381CBED69700EC8A47 /* Array+Copper.swift */,
-				F0E7A8F31CBF30790009D5A5 /* String+Copper.swift */,
+				F06C4EC41CC6EA0E0053AAE3 /* Array+Copper.swift */,
+				F06C4EBC1CC6E8400053AAE3 /* NSURL+Copper.swift */,
+				F06C4EB81CC6E7C80053AAE3 /* String+Copper.swift */,
+				F06C4EC01CC6E8C40053AAE3 /* UIColor+Copper.swift */,
+				F06C4EC61CC6EA400053AAE3 /* UIImage+Copper.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -540,58 +501,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F06C4EC51CC6EA0E0053AAE3 /* Array+Copper.swift in Sources */,
 				F009BED71CBED69800EC8A47 /* NBMetadataHelper.m in Sources */,
 				F009BEA71CBED69800EC8A47 /* C29RecordCache.swift in Sources */,
 				F009BEC71CBED69800EC8A47 /* JWT.swift in Sources */,
 				F009BEEC1CBED69800EC8A47 /* Saveable.swift in Sources */,
-				F009BEE81CBED69800EC8A47 /* NSError+Copper.swift in Sources */,
 				F009BEA31CBED69800EC8A47 /* C29Logger.swift in Sources */,
 				F03EB3B51CC6A3C8003C4506 /* C29Networking.swift in Sources */,
 				F009BEA91CBED69800EC8A47 /* C29Request.swift in Sources */,
 				F009BE9F1CBED69800EC8A47 /* C29CopperworksApplicationDataSource.swift in Sources */,
 				F009BEBF1CBED69800EC8A47 /* CopperRecordObject.swift in Sources */,
 				F009BEDB1CBED69800EC8A47 /* NBPhoneMetaData.m in Sources */,
-				F009BEF01CBED69800EC8A47 /* UIButton+Copper.swift in Sources */,
 				F009BECB1CBED69800EC8A47 /* Mixpanel.swift in Sources */,
-				F009BEC91CBED69800EC8A47 /* LAContext+Copper.swift in Sources */,
 				F009BED51CBED69800EC8A47 /* NBMetadataCoreTestMapper.m in Sources */,
-				F009BEF21CBED69800EC8A47 /* UIFont+Copper.swift in Sources */,
 				F009BED31CBED69800EC8A47 /* NBMetadataCoreTest.m in Sources */,
-				F009BE981CBED69800EC8A47 /* Array+Copper.swift in Sources */,
 				F009BEB81CBED69800EC8A47 /* CopperContact.swift in Sources */,
 				F009BEAC1CBED69800EC8A47 /* C29Scope.swift in Sources */,
 				F009BEB31CBED69800EC8A47 /* C29UserInfoViewController.swift in Sources */,
-				F009BEE91CBED69800EC8A47 /* NSLayoutConstraint+Copper.swift in Sources */,
 				F009BECF1CBED69800EC8A47 /* NBMetadataCore.m in Sources */,
-				F009BEF31CBED69800EC8A47 /* UIImage+Copper.swift in Sources */,
 				F009BEB61CBED69800EC8A47 /* CopperAddressRecord.swift in Sources */,
-				F009BEF11CBED69800EC8A47 /* UIColor+Copper.swift in Sources */,
 				F009BEDF1CBED69800EC8A47 /* NBPhoneNumber.m in Sources */,
 				F0E7A8F21CBF30530009D5A5 /* C29SessionDataSource.swift in Sources */,
 				F009BEAB1CBED69800EC8A47 /* C29RequestStack.swift in Sources */,
 				F009BE9E1CBED69800EC8A47 /* C29CopperworksApplicationCache.swift in Sources */,
 				F009BEB91CBED69800EC8A47 /* CopperContactsRecord.swift in Sources */,
-				F009BEA01CBED69800EC8A47 /* C29IconProcessor.swift in Sources */,
 				F009BEB11CBED69800EC8A47 /* C29Utils.swift in Sources */,
 				F009BEC41CBED69800EC8A47 /* Errors.swift in Sources */,
 				F009BEA41CBED69800EC8A47 /* C29NetworkActivityRegistry.swift in Sources */,
-				F009BEEA1CBED69800EC8A47 /* NSObject+Copper.swift in Sources */,
 				F009BEE61CBED69800EC8A47 /* NSArray+NBAdditions.m in Sources */,
 				F009BEAE1CBED69800EC8A47 /* C29User.swift in Sources */,
+				F06C4EC71CC6EA400053AAE3 /* UIImage+Copper.swift in Sources */,
 				F009BEB41CBED69800EC8A47 /* ContactSource.swift in Sources */,
-				F009BEEB1CBED69800EC8A47 /* NSURL+Copper.swift in Sources */,
 				F009BE9A1CBED69800EC8A47 /* C29Application.swift in Sources */,
 				F009BE9B1CBED69800EC8A47 /* C29Bytes.swift in Sources */,
-				F009BEC31CBED69800EC8A47 /* Enum+Copper.swift in Sources */,
+				F06C4EC11CC6E8C40053AAE3 /* UIColor+Copper.swift in Sources */,
 				F009BEA51CBED69800EC8A47 /* C29OAuth.swift in Sources */,
 				F009BED11CBED69800EC8A47 /* NBMetadataCoreMapper.m in Sources */,
-				F009BEF61CBED69800EC8A47 /* UITextView+Copper.swift in Sources */,
 				F009BEE21CBED69800EC8A47 /* NBPhoneNumberDesc.m in Sources */,
 				F009BE9D1CBED69800EC8A47 /* C29CopperworksApplication.swift in Sources */,
-				F009BEE71CBED69800EC8A47 /* NSDate+Copper.swift in Sources */,
 				F009BED91CBED69800EC8A47 /* NBNumberFormat.m in Sources */,
 				F009BECA1CBED69800EC8A47 /* Loadable.swift in Sources */,
 				F009BEBB1CBED69800EC8A47 /* CopperEmailRecord.swift in Sources */,
+				F06C4EB91CC6E7C80053AAE3 /* String+Copper.swift in Sources */,
 				F009BEE41CBED69800EC8A47 /* NBPhoneNumberUtil.m in Sources */,
 				F009BEB01CBED69800EC8A47 /* C29UserInfo.swift in Sources */,
 				F009BECD1CBED69800EC8A47 /* NBAsYouTypeFormatter.m in Sources */,
@@ -600,16 +551,13 @@
 				F009BEBA1CBED69800EC8A47 /* CopperDateRecord.swift in Sources */,
 				F009BEA21CBED69800EC8A47 /* C29ImageCache.swift in Sources */,
 				F009BEA81CBED69800EC8A47 /* C29Records.swift in Sources */,
-				F009BEF51CBED69800EC8A47 /* UITextField+Copper.swift in Sources */,
 				F009BEBD1CBED69800EC8A47 /* CopperNameRecord.swift in Sources */,
-				F0E7A8F41CBF30790009D5A5 /* String+Copper.swift in Sources */,
 				F009BEAF1CBED69800EC8A47 /* C29UserDevice.swift in Sources */,
 				F009BEC01CBED69800EC8A47 /* CopperSignatureRecord.swift in Sources */,
+				F06C4EBD1CC6E8400053AAE3 /* NSURL+Copper.swift in Sources */,
 				F009BEDD1CBED69800EC8A47 /* NBPhoneMetaDataGenerator.m in Sources */,
 				F009BEEE1CBED69800EC8A47 /* SFHFKeychainUtils.m in Sources */,
-				F009BEF41CBED69800EC8A47 /* UITableView+Copper.swift in Sources */,
 				F009BEC11CBED69800EC8A47 /* CopperUsernameRecord.swift in Sources */,
-				F009BEF71CBED69800EC8A47 /* UIView+Copper.swift in Sources */,
 				F009BEA11CBED69800EC8A47 /* C29IdentityDataSource.swift in Sources */,
 				F009BEB71CBED69800EC8A47 /* CopperAvatarRecord.swift in Sources */,
 				F009BEAA1CBED69800EC8A47 /* C29RequestDataSource.swift in Sources */,
@@ -725,8 +673,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/CopperKit",
-					"$(PROJECT_DIR)/CopperKit/CopperKit",
 				);
 				INFOPLIST_FILE = CopperKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -749,8 +697,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/CopperKit",
-					"$(PROJECT_DIR)/CopperKit/CopperKit",
 				);
 				INFOPLIST_FILE = CopperKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -836,8 +784,8 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(PROJECT_DIR)/**",
 					"$(PROJECT_DIR)/CopperKit",
-					"$(PROJECT_DIR)/CopperKit/CopperKit",
 				);
 				INFOPLIST_FILE = CopperKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

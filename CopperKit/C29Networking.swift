@@ -8,7 +8,13 @@
 
 import Foundation
 
-public typealias C29APICallback = ((AnyObject?, NSError?) -> ())
+//public typealias C29APICallback = ((AnyObject?, NSError?) -> ())
+
+public typealias C29APIResultCallback = ((result: C29APIResult<NSHTTPURLResponse, NSDictionary?, NSError>)->())
+public enum C29APIResult<R, D, E> {
+    case Success(R, D)
+    case Error(E)
+}
 
 @objc public protocol C29API:class {
     var delegate: CopperNetworkAPIDelegate? { get set }

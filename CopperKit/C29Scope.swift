@@ -41,7 +41,7 @@
         C29Scope.Name: "name",
         C29Scope.Phone: "phone",
         C29Scope.Avatar: "picture",
-        C29Scope.Username: "preferred_username",
+        C29Scope.Username: "username",
         C29Scope.Birthday: "birthday",
         C29Scope.Signature: "signature"]
     
@@ -111,7 +111,7 @@
                 return "Numbers".localized.uppercaseString
             }
         case .Username:
-            return "Preferred Username".localized
+            return "Username".localized
         default:
             return self.displayName.uppercaseString
         }

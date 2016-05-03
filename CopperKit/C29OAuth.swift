@@ -101,7 +101,7 @@ public class C29OAuth {
 //            callback(request: nil, error: Error.NilUserId.nserror)
 //            return
 //        }        
-//        session.api.oauthAuthorize(userId, applicationId: applicationId, redirectUri: redirectUri, nonce: nonce, state: state, scope: scope, responseMode: C29OAuth.ResponseModeInternal, responseType: responseType, callback: { (request: AnyObject?, error: NSError?) -> () in
+//        session.api.oauthAuthorize(userId, applicationId: applicationId, redirectUri: redirectUri, nonce: nonce, state: state, scope: scope, responseMode: C29OAuth.ResponseModeInternal, responseType: responseType, callback: { result: C29APIResult -> () in
 //            callback(request: request as? C29Request, error: error)
 //        })
     }

@@ -55,7 +55,7 @@ public class C29CopperworksApplicationCache: NSObject, NSCoding {
     public func remove(application: C29CopperworksApplicationDataSource) {
         cache.removeValueForKey(application.id)
         save()
-        session?.sessionCoordinator?.deleteUserApplication(application) { (object, error) -> () in }
+        session?.sessionCoordinator?.deleteUserApplication(application) { (success, error) -> () in }
     }
 
     public func update(replace: C29CopperworksApplication, add: C29CopperworksApplication) {

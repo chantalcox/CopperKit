@@ -229,8 +229,8 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
         app.updateRecords(records)
         
         // Make our API calls to send the response
-        session.sessionCoordinator?.setRequestGrant(self, status: status, records: records, forceRecordUpload: false) { (requestGrant: AnyObject?, error: NSError?) -> () in
-            if let requestGrant = requestGrant as? C29RequestGrant {
+        session.sessionCoordinator?.setRequestGrant(self, status: status, records: records, forceRecordUpload: false) { (requestGrant: C29RequestGrant?) -> () in
+            if let requestGrant = requestGrant {
                 // Will overwrite any existing application of the same id, hence updateRecords is important above!
                 session.applicationCache.push(app)
                 if let redirectUri = requestGrant.redirectUri {
@@ -245,6 +245,9 @@ public class C29Request: NSObject, NSCoding, C29RequestDataSource, C29RequestCal
             } else {
                 callback(success: false, redirecting: false)
             }
+            
+            
+            
         }
     }
     
