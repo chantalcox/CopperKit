@@ -19,7 +19,7 @@ public enum C29UserInfoResult<T, U> {
 }
 
 public protocol C29ApplicationDelegate {
-    func didFinishWithResult(result: C29UserInfoResult)
+    func didFinishWithResult(result: C29UserInfoResult<C29UserInfo, NSError>)
 }
 
 @available(iOS 9.0, *)
@@ -213,7 +213,7 @@ extension C29Application: C29UserInfoViewControllerDelegate {
             self.completion?(result: .Failure(error))
         } else {
             //self.delegate?.didFinishWithResult(result: C29UserInfoResult)
-            self.completion?(result: result)
+            self.completion?(result: .UserCancelled)
         }
         self.c29ViewController?.dismissViewControllerAnimated(true, completion: {
             self.c29ViewController = nil
