@@ -269,6 +269,7 @@ public class C29AuthenticationAlertController: NSObject, CopperAlertControllerDa
     }
 
     func resetDigitsEntry() {
+        digitsEntrySent = false
         didUpdateDigitsEntry("")
     }
     
